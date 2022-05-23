@@ -34,8 +34,11 @@ public class Main {
         int k = getK(clave[0]);
 
         //DESCODIFICAMOS EL PAR K*,C
-        String kCod = "dÑ(.ZQe qCurdEÑKÍHfk!QEedoÓM1F";
-        String msgCifrado = "yáxFMm dTlqGM!Emi9Q)7h¿iÚYymrvLúfYLÉvxnf68U0WWfÓ)p)wzRqGLú)UtÚcoQdgL l fi?(FFxEHLUz:jx7scoFÑD::mOZK?3Mf.THFUOat3ogaÉI?U0ÁPA6tyg7girF,FDÉíYkLzRú4:PPw),E!WBQT:SWí:,túVÍ:JM7ÓQn:XúLíÍ,uS1gXmNao0eKzÓjÁ:x3OmóI09AnkA:?ÑIDg17(AXoXFGHc6(q75rWO!";
+        //String kCod = "dÑ(.ZQe qCurdEÑKÍHfk!QEedoÓM1F";
+        //String msgCifrado = "yáxFMm dTlqGM!Emi9Q)7h¿iÚYymrvLúfYLÉvxnf68U0WWfÓ)p)wzRqGLú)UtÚcoQdgL l fi?(FFxEHLUz:jx7scoFÑD::mOZK?3Mf.THFUOat3ogaÉI?U0ÁPA6tyg7girF,FDÉíYkLzRú4:PPw),E!WBQT:SWí:,túVÍ:JM7ÓQn:XúLíÍ,uS1gXmNao0eKzÓjÁ:x3OmóI09AnkA:?ÑIDg17(AXoXFGHc6(q75rWO!";
+
+        String kCod = "e5wUúe";
+        String msgCifrado = "8á !5JC9FRÑFf FY4Qo:U9Lcñ9tdÉ8LÍ)ÁÚJT9jKL)UlÚbwnbjF1ÍKcfLPU:k0rSjJ";
 
         //GENERAMOS LA CLAVE EXTENDIDA
         String Kstring = decodificarMSG(kCod,k,clave,alfabeto);     //DESCIFRAMOS K CON RSA
@@ -51,13 +54,15 @@ public class Main {
 
         //CLAVE PUBLICA DEL RECEPTOR
         BigInteger factorizacion2[] =  new BigInteger[]{new BigInteger("98179"),new BigInteger("98207")};
-        BigInteger clave2[] = new BigInteger[]{new BigInteger("9641865053"),new BigInteger("70241161"),factorizacion[0],factorizacion[1]};
+        BigInteger clave2[] = new BigInteger[]{new BigInteger("9641865053"),new BigInteger("70241161"),factorizacion2[0],factorizacion2[1]};
+            //TAMAÑO DE BLOQUE DE CIFRADO => K
+            int k2 = getK(clave2[0]);
 
         //CIFRAMOS EL CODIGO (CON RSA) Y LA CLAVE (CON VIGENERE)
-        String k2 = "MARTE";
-        String k2Cifrada = codificarMSG(k2,k,clave,alfabeto);
+        String k2Claro = "MARTE";
+        String k2Cifrada = codificarMSG(k2Claro,k2,clave2,alfabeto);
         String msg2 = "GACELA DE LA TERRIBLE PRESENCIA (Federico García Lorca, 1898-1936)";
-        int k2ext[] = getClaveExtendida(alfabeto,k2,msg2.length());
+        int k2ext[] = getClaveExtendida(alfabeto,k2Claro,msg2.length());
         String msg2Cifrado = getMensajeCod(alfabeto,k2ext,msg2);
 
         System.out.println("CODIGO CIFRADO: "+k2Cifrada);
